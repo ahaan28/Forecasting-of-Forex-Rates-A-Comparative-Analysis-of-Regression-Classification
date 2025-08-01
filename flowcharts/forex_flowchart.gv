@@ -1,0 +1,24 @@
+digraph ForexPredictionFlow {
+	graph [rankdir=TB splines=ortho]
+	nodesep=0.5 ranksep=0.8
+	"Data Collection" [label="{ Data Collection | Yahoo Finance API (yfinance)\n15 USD currency pairs\nOHLC data (2015-2025) }" fillcolor="#4CAF50" fontname=Helvetica fontsize=10 height=1.2 shape=Mrecord style=filled width=2.5]
+	"Data Preprocessing" [label="{ Data Preprocessing | Handle missing values
+(Linear Interpolation)\nRemove outliers
+(Z-score > 3)\nNormalization
+(StandardScaler) }" fillcolor="#2196F3" fontname=Helvetica fontsize=10 height=1.2 shape=Mrecord style=filled width=2.5]
+	"Feature Engineering" [label="{ Feature Engineering | Calculate RSI (14-day)\nPrice Momentum Signals\nVolatility Features }" fillcolor="#9C27B0" fontname=Helvetica fontsize=10 height=1.2 shape=Mrecord style=filled width=2.5]
+	"Model Development" [label="{ Model Development | Ridge Regression\nRandom Forest\nXGBoost\nNeural Networks
+(MLP, LSTM)\nHyperparameter Tuning }" fillcolor="#FF9800" fontname=Helvetica fontsize=10 height=1.2 shape=Mrecord style=filled width=2.5]
+	"Portfolio Optimization" [label="{ Portfolio Optimization | Equal Weight Allocation\nPrediction Aggregation\nRisk-Adjusted Returns }" fillcolor="#E91E63" fontname=Helvetica fontsize=10 height=1.2 shape=Mrecord style=filled width=2.5]
+	"Evaluation & Forecasting" [label="{ Evaluation & Forecasting | Metrics (MSE/RMSE/R²/MAE)\nSHAP Value Analysis\n30-Day Forecast Visualization\nModel Comparison }" fillcolor="#607D8B" fontname=Helvetica fontsize=10 height=1.2 shape=Mrecord style=filled width=2.5]
+	"Data Collection" -> "Data Preprocessing"
+	"Data Preprocessing" -> "Feature Engineering"
+	"Feature Engineering" -> "Model Development"
+	"Model Development" -> "Portfolio Optimization"
+	"Portfolio Optimization" -> "Evaluation & Forecasting"
+	{
+		rank=same
+		DataCollection [label="{Data Collection | ...}" fillcolor="#4CAF50" fontname=Helvetica fontsize=10 height=1.2 shape=Mrecord style=filled width=2.5]
+		DataPreprocessing [label="{Data Preprocessing | ...}" fillcolor="#2196F3" fontname=Helvetica fontsize=10 height=1.2 shape=Mrecord style=filled width=2.5]
+	}
+}
